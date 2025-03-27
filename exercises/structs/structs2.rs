@@ -5,8 +5,6 @@
 // Execute `rustlings hint structs2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 #[derive(Debug)]
 struct Order {
     name: String,
@@ -47,7 +45,7 @@ mod tests {
             made_by_mobile: false,
             made_by_email: true,
             item_number: 123,
-            count: 0,
+            count: 01,
         };
 
 
