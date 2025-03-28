@@ -41,8 +41,8 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // already present!
 
         match fruit {
-            Fruit::Banana => basket.insert(self, 5),
-            Fruit::Pineapple => basket.insert(self, 10),
+            Fruit::Banana => basket.insert(Fruit::Banana, 5),
+            Fruit::Pineapple => basket.insert(Fruit::Pineapple, 10),
         }
     }
 }
