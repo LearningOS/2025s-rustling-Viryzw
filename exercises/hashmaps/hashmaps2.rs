@@ -40,13 +40,21 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // basket. Note that you are not allowed to put any type of fruit that's
         // already present!
 
-        match fruit {
-            Fruit::Banana => basket.insert(Fruit::Banana, 5),
-            Fruit::Pineapple => basket.insert(Fruit::Pineapple, 10),
-            _ => {},
+        // match fruit {
+            // Fruit::Banana => basket.insert(Fruit::Banana, 5),
+            // Fruit::Pineapple => basket.insert(Fruit::Pineapple, 10),
+            // _ => {},
+
+        if !basket.contains_key(&fruit) {
+            basket.insert(fruit, match fruit {
+                Fruit::Banana => 5,
+                Fruit::Pineapple => 10,
+                _ => 0,  // 这里不会被执行，但保持完整性
+            });
         }
     }
 }
+
 
 #[cfg(test)]
 mod tests {
