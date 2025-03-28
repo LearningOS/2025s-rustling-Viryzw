@@ -43,6 +43,7 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         match fruit {
             Fruit::Banana => basket.insert(Fruit::Banana, 5),
             Fruit::Pineapple => basket.insert(Fruit::Pineapple, 10),
+            _ => {},
         }
     }
 }
