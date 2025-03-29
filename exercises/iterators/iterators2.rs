@@ -6,7 +6,6 @@
 // Execute `rustlings hint iterators2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 // Step 1.
 // Complete the `capitalize_first` function.
@@ -48,8 +47,8 @@ pub fn capitalize_words_string(words: &[&str]) -> String {
     let first_word = capitalize_first(iter.next().unwrap()); // 只对第一个单词大写
     let rest: String = iter.map(|s| *s).collect::<String>(); 
     
-    first_word + &rest
-
+    let result = first_word + &rest;
+    result
 
 }
 
