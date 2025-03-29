@@ -24,10 +24,6 @@ pub fn capitalize_first(input: &str) -> String {
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 
-    if words.is_empty() {
-        return String::new();
-    }
-
     let result = words.iter().map(|word| capitalize_first(word)).collect();
     result
 }
@@ -38,10 +34,6 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
     // String::new()
-
-    if words.is_empty() {
-        return String::new();
-    }
 
     let mut iter = words.iter();
     let first_word = capitalize_first(iter.next().unwrap()); // 只对第一个单词大写
