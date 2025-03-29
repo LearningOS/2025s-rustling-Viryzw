@@ -35,11 +35,7 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 pub fn capitalize_words_string(words: &[&str]) -> String {
     // String::new()
 
-    let mut iter = words.iter();
-    let first_word = capitalize_first(iter.next().unwrap()); // 只对第一个单词大写
-    let rest: String = iter.map(|s| *s).collect::<String>(); 
-    
-    let result = first_word + &rest;
+    let result = words.iter().map(|word| capitalize_first(word)).collect::<String>();
     result
 
 }
