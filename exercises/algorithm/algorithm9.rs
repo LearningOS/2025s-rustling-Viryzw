@@ -2,7 +2,7 @@
 	heap
 	This question requires you to implement a binary heap function
 */
-// I AM NOT DONE
+
 
 use std::cmp::Ord;
 use std::default::Default;
@@ -38,6 +38,9 @@ where
 
     pub fn add(&mut self, value: T) {
         //TODO
+        self.count += 1;
+        self.items.push(value);
+        self.shift_up(self.count);
     }
 
     fn parent_idx(&self, idx: usize) -> usize {
@@ -58,13 +61,68 @@ where
 
     fn smallest_child_idx(&self, idx: usize) -> usize {
         //TODO
-		0
+        let left_child = self.left_child_idx(idx);
+        let right_child = self.right_child_idx(idx);
+        if right_child > self.count {
+            left_child
+        } else if (self.comparator)(&self.items[left_child], &self.items[right_child]) {
+            left_child
+        } else {
+            right_child
+        }
+    }
+
+    fn shift_up(&mut self, idx: usize) {
+        let mut idx = idx;
+        while idx > 1 {
+            let parent_idx = self.parent_idx(idx);
+            if (self.comparator)(&self.items[idx], &self.items[parent_idx]) {
+                self.items.swap(idx, parent_idx);
+                idx = parent_idx;
+            } else {
+                break;
+            }
+        }
+    }
+    fn shift_down(&mut self, idx: usize) {
+        let mut idx = idx;
+        while self.children_present(idx) {
+            let smallest_child_idx = self.smallest_child_idx(idx);
+            if (self.comparator)(&self.items[smallest_child_idx], &self.items[idx]) {
+                self.items.swap(smallest_child_idx, idx);
+                idx = smallest_child_idx;
+            } else {
+                break;
+            }
+        }
+    }
+    pub fn remove(&mut self) -> Option<T> where T:PartialOrd + Clone {
+        if self.is_empty() {
+            return None;
+        }
+        let result = self.items[1].clone();
+        self.items[1] = self.items.pop().unwrap();
+        self.count -= 1;
+        self.shift_down(1);
+        Some(result)
+    }
+    pub fn peek(&self) -> Option<&T> {
+        if self.is_empty() {
+            return None;
+        }
+        Some(&self.items[1])
+    }
+    pub fn peek_mut(&mut self) -> Option<&mut T> {
+        if self.is_empty() {
+            return None;
+        }
+        Some(&mut self.items[1])
     }
 }
 
 impl<T> Heap<T>
 where
-    T: Default + Ord,
+    T: Default + Ord + Clone,
 {
     /// Create a new MinHeap
     pub fn new_min() -> Self {
@@ -79,13 +137,14 @@ where
 
 impl<T> Iterator for Heap<T>
 where
-    T: Default,
+    T: Default + PartialOrd + Clone,
 {
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
         //TODO
-		None
+        let result = self.remove();
+        result
     }
 }
 
@@ -95,7 +154,7 @@ impl MinHeap {
     #[allow(clippy::new_ret_no_self)]
     pub fn new<T>() -> Heap<T>
     where
-        T: Default + Ord,
+        T: Default + Ord + Clone,
     {
         Heap::new(|a, b| a < b)
     }
@@ -107,7 +166,7 @@ impl MaxHeap {
     #[allow(clippy::new_ret_no_self)]
     pub fn new<T>() -> Heap<T>
     where
-        T: Default + Ord,
+        T: Default + Ord + Clone,
     {
         Heap::new(|a, b| a > b)
     }
