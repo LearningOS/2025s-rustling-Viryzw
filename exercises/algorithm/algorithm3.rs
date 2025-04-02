@@ -3,10 +3,32 @@
 	This problem requires you to implement a sorting algorithm
 	you can use bubble sorting, insertion sorting, heap sorting, etc.
 */
-// I AM NOT DONE
 
-fn sort<T>(array: &mut [T]){
+
+fn sort<T: std::cmp::PartialOrd>(array: &mut [T]){
 	//TODO
+    if array.len() <= 1 {
+        return;
+    }
+
+    let size = array.len();
+    for i in 0..(size - 1) {
+        // 标记当前循环是否发生元素交换
+        let mut swapped = false;
+
+        // 最后i个元素已经排好了顺序
+        for j in 1..(size - i) {
+            if array[j - 1] > array[j] { 
+                array.swap(j - 1, j);
+                swapped = true;
+            }
+        }
+
+        // 如果当前循环没有发生元素交换，说明数组已经有序
+        if !swapped {
+            break;
+        }
+    }
 }
 #[cfg(test)]
 mod tests {
