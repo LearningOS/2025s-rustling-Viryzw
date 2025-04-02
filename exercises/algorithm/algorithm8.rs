@@ -85,15 +85,7 @@ impl<T> myStack<T> {
     }
     pub fn is_empty(&self) -> bool {
 		//TODO
-        if !self.q1.is_empty() {
-            while self.q1.size() > 1 {
-                let elem = self.q1.dequeue().unwrap();
-                self.q2.enqueue(elem);
-            }
-            let result = self.q1.dequeue().unwrap();
-            std::mem::swap(&mut self.q1, &mut self.q2);
-            return Ok(result);
-        }
+        self.q1.is_empty()
     }
 }
 

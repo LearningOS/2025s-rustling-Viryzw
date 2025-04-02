@@ -16,7 +16,7 @@ fn main() {
     // );
     // println!("cargo:{}", your_command);
 
-    println!("cargo:rerun-if-env-changed=TEST_FOO");
+    // println!("cargo:rerun-if-env-changed=TEST_FOO");
     println!("cargo:rustc-env=TEST_FOO={}", timestamp);
 
 
@@ -29,5 +29,5 @@ fn main() {
     // let your_command = "Your command here, please checkout exercises/tests/build.rs";
     // println!("cargo:{}", your_command);
 
-    println!("cargo:features=pass");
+    println!("cargo:rustc-cfg=feature=\"pass\"");
 }
